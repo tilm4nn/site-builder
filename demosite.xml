@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="sitebuilder.xsl" ?>
+<!--
+	The MIT License
+
+	Copyright (C) 2001 
+	Tilmann Kuhn           Gildestr. 34
+	http://www.tkuhn.de    76149 Karlsruhe
+	sbuilder@tkuhn.de      Germany
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in
+	all copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	THE SOFTWARE.                                              by Tilmann Kuhn
+	
+	This is the demo-website to test the SiteBuilder tool. It can be used       
+	together with demotrans.xsl as "pagetranslator".
+	
+	Since the xml below is obvious, I did not insert many comments.
+ -->
+
+<sb:website xmlns="http://www.w3.org/1999/xhtml"
+			xmlns:sb="http://www.tkuhn.de/xml/sitebuilder/SiteBuilder"
+			xmlns:pt="http://www.tkuhn.de/xml/sitebuilder/PageTranslator">
+
+<!-- 
+     linkprefix:
+	 ===========
+     Insert the absolute path from the root of your webserver to the home-      
+     directory of your website here. Include a '/' at the end and the beginning!
+	 Example 1:
+	 If my home was http://www.tkuhn.de/
+	 and the root of my server http://www.tkuhn.de/ I had to enter '/'
+	 
+	 Example 2:
+	 If my home was http://studwww.ira.uka.de/~s_kuhnti/
+	 and the root of the server http://studwww.ira.uka.de/ I had to enter
+	 '/~s_kuhnti/'
+	 
+	 outputprefix:
+	 =============
+	 Insert the root directory where you want your files to be output. Include a
+	 '/' at the end!
+	 
+	 filename:
+	 =========
+	 Set the defaultfilename for the files that are not given a specialone by   
+	 the pagespec-element.
+  -->
+  
+  <sb:pagetree linkprefix="/" outputprefix="./" filename="index.html" build="yes">
+    <sb:pagespec path="home" text="home" build="yes"/>
+    <sb:pagespec path="page1" text="page 1" build="rec">
+      <sb:pagespec path="page1" pageref="sub1" text="sub 1" build="no"/>
+	  <sb:pagespec path="page2" pageref="sub2" text="sub 2" build="no"/>
+	  <sb:pagespec absolutepath="dirpre:page3/" pageref="page3" text="page 3" build="yes"/>
+    </sb:pagespec>
+	<sb:pagespec path="page2" text="page 2" build="yes"/>
+	<sb:pagespec absolutepath="dirpre:page3/" pageref="page4" filename="page4.html" text="page 4" build="yes"/>
+  </sb:pagetree>
+
+<!--OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO-->
+
+<sb:page id="home">
+  <pt:navbar/>
+  <h1>This is "home".</h1>
+</sb:page>
+
+<!--OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO-->
+
+<sb:page id="page1">
+  <pt:navbar/>
+  <h1>This is page one.</h1>
+</sb:page>
+
+<!--OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO-->
+
+<sb:page id="sub1">
+  <pt:navbar/>
+  <h1>This is page one subpage one.</h1>
+</sb:page>
+
+<!--OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO-->
+
+<sb:page id="sub2">
+  <pt:navbar/>
+  <h1>This is page one subpage two.</h1>
+</sb:page>
+
+<!--OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO-->
+
+<sb:page id="page2">
+  <pt:navbar/>
+  <h1>This is page two.</h1>
+</sb:page>
+
+<!--OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO-->
+
+<sb:page id="page3">
+  <pt:navbar/>
+  <h1>This is page three.</h1>
+</sb:page>
+
+<!--OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO-->
+
+<sb:page id="page4">
+  <pt:navbar/>
+  <h1>This is page four.</h1>
+</sb:page>
+
+<!--OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO-->
+
+</sb:website>

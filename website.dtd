@@ -1,0 +1,101 @@
+<!--
+	The MIT License
+
+	Copyright (C) 2001 
+	Tilmann Kuhn           Gildestr. 34
+	http://www.tkuhn.de    76149 Karlsruhe
+	sbuilder@tkuhn.de      Germany
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in
+	all copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	THE SOFTWARE.
+
+	
+	
+    This dtd is a documentation for the input-files for SiteBuilder (c) by     
+    Tilmann Kuhn. It must not be used for validation!                          
+ -->
+
+
+<!ELEMENT website (pagetree,page*)>
+<!-- The root element                                                        -->
+
+
+
+
+<!ELEMENT pagetree (pagespec*)>
+<!-- Defines the directory structure and output propperties of the files to     
+     output.                                                                 -->
+
+<!ATTLIST pagetree filename CDATA #IMPLIED>
+<!-- Sets the default outputfilename that is used when no filname is set by the 
+     filename-attribute in the pagespec-element.                             -->
+	 
+<!ATTLIST pagetree outputprefix CDATA #IMPLIED>
+<!-- Sets the directory where the files will be output. Include a '/' at        
+     the end. Outputpaths will be calculated relatively to this dir.         -->	 
+	 
+<!ATTLIST pagetree build (yes|no|rec) #REQUIRED>
+<!-- yes: no special effect                                                     
+     no:  no special effect                                                     
+	 rec: forces all child-pages to be output                                -->
+
+	 
+	 
+	 
+<!ELEMENT pagespec (pagespec*)>
+<!-- Defines the position and output-propperties of a page in the output        
+     structure.                                                              -->
+
+<!ATTLIST pagespec build (yes|no|rec) #REQUIRED>
+<!-- yes: the page will be output                                               
+     no:  the page won't be output                                              
+	 rec: forces the page and all child-pages to be output                   -->
+
+<!ATTLIST pagespec path CDATA #IMPLIED>
+<!-- Determines the path (name of directory) to which the file will be output.  
+     Determines which page this pagespec refers to if no pageref-attribute is   
+     present.                                                                   
+     Attention: May only contain one directory-name an no '/'. The output-path  
+	            is evaluated by this attribute and the path attributes of the   
+			    ancestor elements. Will only be used if no attribute            
+                absolutepath is present!                                     -->
+				
+<!ATTLIST pagespec absolutepath CDATA #IMPLIED>
+<!-- Determines the absolute path (name of directory) to which the file will be 
+     output.                                                                    
+     Attention: Include a '/' at the end. Only use this if you don't want the   
+                the output path to be evaluated from the tree structure of the  
+                pagespec-elements' path attributes.                          -->				
+			   
+<!ATTLIST pagespec pageref CDATA #IMPLIED>
+<!-- Determines which page this pagespec refers to. If not present and a path-  
+     attribute is present this is used instead. If a page has 'home' as it's id 
+     it will be output in the root-directory specified in sidebuilder.xsl.   -->
+
+<!ATTLIST pagespec filename CDATA #IMPLIED>
+<!-- If filename is specified it is used instead of the default filename set in 
+     sidebuilder.xsl as destination for the output of the html data.         -->
+
+
+     
+<!ELEMENT page ANY>
+<!-- Defines the content of one page                                         -->
+
+<!ATTLIST page id ID #REQUIRED>
+<!-- This is the id of the page.                                             -->
+
