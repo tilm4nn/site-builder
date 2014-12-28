@@ -1,27 +1,90 @@
-SiteBuilder Version 0.9.5              
-	 
-sitebuilder.xsl is not supposed to run on an XML-pocessor other than Xalan J
-because it uses its XSLT-extensions. However do so if it works ;-)
+SiteBuilder
+-----------
+Copyright (C) 2014 Tilmann Kuhn
+See LICENSE.txt for details of the MIT license.
+
+Contents of this readme:
+
+* Purpose
+* Change history
+* Contents of the release
+* How to get started
+* How to contact me 
+* Limitations and bugs
 
 
-Contents of this zip-file:
-==========================
+
+PURPOSE
+
+This is a tiny XSLT for the Xalan XML-processor can be used to transform XML-web-pages
+defined in one XML file similar to the following into a directory-strucrure of XHTML/HTML
+files to be published on a www-server.
+
+Example:
+<website>
+  <pagetree build="yes">
+    <pagespec path="home" build="yes"/>
+    <pagespec path="studium" build="yes">
+      <pagespec path="informatik" build="no"/>
+      <pagespec path="info-links" build="rec"/>
+    </pagespec>
+    ...
+  </pagetree>
+  <page id="home">
+    ...
+  </page>
+  <page id="studium">
+    ...
+  </page>
+  ...
+</website>
+In this example the following files would be created:
+index.html
+studium/index.html
+studium/info-links/index.html
+Of course you can have the files output to other filenames than 'index.html' and other
+locations than the calculated path from the pagespectree too, as you can insert links
+to other pages in this navigational structure.
+
+
+
+CHANGE HISTORY
+
+0.9.5 - Updated README and LICENSE
+0.9.4 - Introduced optional pageref attribute in pagespec to determine the page, so
+        that you can have the same paths for diffenrent page ids.
+      - Introduced optional absolutepath attribute in pagespec to give an absolute
+        path where the file should be output instead of the path calculated from the
+        path attributes.
+      - Status-output is valid html now.
+      - Link-, outputdirectory-prefixes and default-filename can now be set in the
+        xml, as a variable or from the commandline.
+      - I did a little bugfixing on the dtd. I hope it is correct now because I'm not
+        very familiar with dtds. :-(
+0.9.3 - Pages will be output even if there is a href-attribure specified in the
+        "pagespec". If you don't want them to be output specify build="no". (This can
+        be used when you need to build a template for a page that is on a different
+        url e.g. a script that is in cgi-bin.
+      - The href-attribute was also removed from "website.dtd".
+0.9.2 - The first release.
+
+
+
+CONTENTS OF THE RELEASE
 
 readme.txt        - This file.
-
 sitebuilder.xsl   - The xslt that is used to convert a xml-website to html-files.
-
 demotrans.xsl     - The xslt that converts a single page inside the xml to html.
-
 website.dtd       - The DTD used for the input-files for sitebuilder.xsl.
-
 demosite.xml      - A demonstration xml-file that defines a website.
-
 demobuild.bat     - The shell-script that runs the demo.
 
 
-How to run the demo:
-====================
+
+HOW TO GET STARTED
+sitebuilder.xsl is not supposed to run on an XML-pocessor other than Xalan J
+because it uses its XSLT-extensions. However do so if it works ;-)
+
 1.
 Examine the files sitebuilder.xsl and demosite.xml to change the commented variables
 and/or values so that they fit your environment. Usually you don't need to change
@@ -42,37 +105,14 @@ Maybe you have to move them to your webserver.
 Examine "index.html" in your home directory via the server.
 
 
-What can I do with SiteBuilder?
-===============================
 
-Since SiteBuilder is a very little tool, it is not hard to understand what it does.
-First do the demo. And then have a look at the commented DTD website.dtd to see
-what features SiteBuilder has to offer.
+HOW TO CONTACT ME
 
+http://www.tkuhn.de
+sbuilder@tkuhn.de
 
 
-The MIT License
-===============
 
-Copyright (C) 2001 
-Tilmann Kuhn           Gildestr. 34
-http://www.tkuhn.de    76149 Karlsruhe
-sbuilder@tkuhn.de      Germany
+LIMITATIONS AND BUGS
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+Not known so far. Please report your experiences to me.
